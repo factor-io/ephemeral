@@ -13,16 +13,21 @@ describe Ephemeral::API do
       data = {
         image: 'ubuntu',
         commands: ['ls'],
-        # files: [ 
-        #   {
-        #     path: '/test.zip',
-        #     file_url:'http://foo.com/test.zip'
-        #   }
-        # ]
+        files: [
+          {
+            path:'/foo',
+            content: 'echo "Hello World!"'
+          }
+        ]
       }
       post '/api/jobs', data
 
-      expect(last_response).to be_ok
+      expect(last_response.status).to eq(201), JSON.parse(last_response.body)['error']
+      body = JSON.parse(last_response.body)
+      expect(body.keys).to include('id')
+      id = body['id']
+
+      expect(Ephemeral::JobWorker).to have_enqueued_job(id)
     end
   end
 end

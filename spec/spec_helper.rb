@@ -3,6 +3,11 @@
 require 'codeclimate-test-reporter'
 require 'rspec'
 require 'rack/test'
+require 'mock_redis'
+require 'sidekiq'
+require 'rspec-sidekiq'
+
+Sidekiq::Testing.fake!
 
 ENV['RACK_ENV']='test'
 
