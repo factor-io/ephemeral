@@ -5,10 +5,11 @@ Sidekiq.configure_server do |config|
 end
 
 module Ephemeral
-  class JobWorker
+  class Worker
     include Sidekiq::Worker
 
-    def perform(id)
+    def perform(options)
+
     end
   end
 end
