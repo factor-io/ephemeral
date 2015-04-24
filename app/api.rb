@@ -4,7 +4,7 @@ require 'sidekiq'
 require_relative './worker.rb'
 
 Sidekiq.configure_client do |config|
-  config.redis = { :namespace => 'jobs', :size => 1 }
+  config.redis = { namespace: 'jobs', size: 1, url:ENV['REDISCLOUD_URL'] }
 end
 
 module Ephemeral
