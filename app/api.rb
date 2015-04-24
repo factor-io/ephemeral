@@ -28,9 +28,10 @@ module Ephemeral
         end
       end
       post do
-        id = SecureRandom.hex(8)
-        Ephemeral::JobWorker.perform_async id
-        {id: id}
+        job = Ephemeral::Job.new
+        job.status = :queued
+        Ephemeral::Worker.perform_async job.to_json
+        job.as_json
       end
     end
   end

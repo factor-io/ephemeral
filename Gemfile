@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
-ruby '2.1.3'
+ruby '2.2.2'
 
 gem 'sinatra', '~> 1.4.5'
 gem 'sinatra-contrib'
 gem 'haml', '~> 4.0.6'
+gem 'activemodel', '~> 4.2.1'
 
 gem 'grape', '~> 0.9.0'
 

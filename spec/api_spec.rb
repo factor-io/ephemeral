@@ -23,11 +23,15 @@ describe Ephemeral::API do
       post '/api/jobs', data
 
       expect(last_response.status).to eq(201), JSON.parse(last_response.body)['error']
-      body = JSON.parse(last_response.body)
-      expect(body.keys).to include('id')
-      id = body['id']
+      body_string = last_response.body
+      body_hash = JSON.parse(body_string)
+      expect(body_hash.keys).to include('id')
+      expect(body_hash.keys).to include('status')
+      id = body_hash['id']
 
-      expect(Ephemeral::JobWorker).to have_enqueued_job(id)
+      job = Ephemeral::Job.new.from_json(body_string)
+
+      expect(Ephemeral::Worker).to have_enqueued_job(job.to_json)
     end
   end
 end
