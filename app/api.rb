@@ -2,6 +2,8 @@ require 'grape'
 require 'sidekiq'
 
 require_relative './worker.rb'
+require_relative '../lib/job.rb'
+require_relative '../lib/job_entity.rb'
 
 Sidekiq.configure_client do |config|
   config.redis = { namespace: 'jobs', size: 1, url:ENV['REDISCLOUD_URL'] }
@@ -28,10 +30,12 @@ module Ephemeral
         end
       end
       post do
-        job = Ephemeral::Job.new
-        job.status = :queued
-        Ephemeral::Worker.perform_async job.to_json
-        job.as_json
+        job_model = Ephemeral::Job.new
+        job_model.status = :queued
+
+        data = Ephemeral::JobEntity.represent(job_model)
+        Ephemeral::Worker.perform_async data
+        data
       end
     end
   end

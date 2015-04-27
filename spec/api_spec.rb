@@ -10,7 +10,7 @@ describe Ephemeral::API do
   end
   describe 'Jobs' do
     it 'can create' do
-      data = {
+      request_data = {
         image: 'ubuntu',
         commands: ['ls'],
         files: [
@@ -20,18 +20,15 @@ describe Ephemeral::API do
           }
         ]
       }
-      post '/api/jobs', data
+      post '/api/jobs', request_data
+      
+      response_data = JSON.parse(last_response.body)
 
-      expect(last_response.status).to eq(201), JSON.parse(last_response.body)['error']
-      body_string = last_response.body
-      body_hash = JSON.parse(body_string)
-      expect(body_hash.keys).to include('id')
-      expect(body_hash.keys).to include('status')
-      id = body_hash['id']
+      expect(last_response.status).to eq(201), response_data['error']
+      expect(response_data.keys).to include('id')
+      expect(response_data.keys).to include('status')
 
-      job = Ephemeral::Job.new.from_json(body_string)
-
-      expect(Ephemeral::Worker).to have_enqueued_job(job.to_json)
+      expect(Ephemeral::Worker).to have_enqueued_job(response_data)
     end
   end
 end

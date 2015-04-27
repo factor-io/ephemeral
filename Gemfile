@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
+# Application
 gem 'sinatra', '~> 1.4.5'
 gem 'sinatra-contrib'
 gem 'haml', '~> 4.0.6'
-gem 'activemodel', '~> 4.2.1'
-
 gem 'grape', '~> 0.11.0'
+gem 'grape-entity', '~> 0.4.5'
 
+# Runtime
 gem 'foreman', '~> 0.78.0'
-
 gem 'sidekiq', '~> 3.3.4'
 
 group :test do
