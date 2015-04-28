@@ -49,7 +49,7 @@ module Ephemeral
       params do
         requires :image, type: String, desc: 'Docker Image ID'
         requires :repo, type: String, desc: 'URL of target repository'
-        requires :build_type, type: String, values: ['middleman'], desc: 'Middle ware'
+        requires :build_type, type: String, desc: 'Middle ware'
       end
 
       post do 
