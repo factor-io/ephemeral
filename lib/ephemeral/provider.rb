@@ -2,30 +2,16 @@
 
 module Ephemeral
   class Provider
-
-    def id
+    def start
     end
 
-    def commands=(value)
+    def status
     end
 
-    def commands
+    def stop
     end
 
-    def image=(value)
+    def logs
     end
-
-    def image
-    end
-
-    def upload_file(file, path)
-    end
-
-    def download_file(path)
-    end
-
-    def run
-    end
-
   end
 end
