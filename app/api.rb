@@ -43,13 +43,13 @@ module Ephemeral
       end
     end
 
-    resource :build do
+    resource :builds do
 
       desc 'Creates a new build'
       params do
         requires :image, type: String, desc: 'Docker Image ID'
         requires :repo, type: String, desc: 'URL of target repository'
-        requires :build_type, type: String, desc: 'Middle ware'
+        requires :build_type, type: String, values: ['middleman'], desc: 'Middle ware'
       end
 
       post do 
