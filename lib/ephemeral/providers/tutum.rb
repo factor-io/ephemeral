@@ -11,7 +11,7 @@ module Ephemeral
       
       def initialize(options={})
         @id       = SecureRandom.hex(8)
-        @image    = options[:image] || 'ubuntu'
+        @image    = options[:image] || 'ubuntu:latest'
         @name     = options[:name]  || "build-#{@id}"
         @size     = options[:size]  || 'XS'
         @command  = options[:command]
@@ -43,14 +43,29 @@ module Ephemeral
         @tutum.services.get(@service_id)
       end
 
+      def can_start?
+        ['Not running','Stopped'].include?(status['state'])
+      end
+
+      def can_stop?
+        ['Not running','Running','Partly running','Stopped'].include?(status['state'])
+      end
+
+      def started?
+        status['state'] == 'Running'
+      end
+
+      def stopped?
+        status['state'] == 'Stopped'
+      end
+
       def stop
         raise "Service is not running" unless @service_id
-        @tutum.services.stop(@service_id)
         @tutum.services.terminate(@service_id)
       end
 
       def logs
-        @tutum.services.logs(@service_id)
+        @tutum.services.logs(@service_id)['logs']
       end
     end
   end
