@@ -4,7 +4,7 @@ require_relative '../provider.rb'
 
 module Ephemeral
   module Providers
-    class Tutum < Ephemeral::Provider
+    class TutumProvider < Ephemeral::Provider
       attr_accessor :command, :image, :name, :size, :username
       attr_writer :api_key
       attr_reader :id, :service_id
