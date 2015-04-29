@@ -18,10 +18,10 @@ module Ephemeral
     def self.script(options = {})
       id         = options[:id]
       repo       = options[:repo]
-      type       = options[:type]
+      type       = options[:type].to_sym
       upload_url = options[:upload_url] || "http://ephemeral.io/files/#{id}"
       libs       = options[:libs] || []
-      settings   = BUILD_SETTINGS[type.to_sym]
+      settings   = BUILD_SETTINGS[type]
       libs       = settings[:libs] + DEFAULT_LIBS + libs
 
       commands_setup = [
