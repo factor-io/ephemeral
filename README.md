@@ -1,5 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/factor-io/ephemeral.png)](https://codeclimate.com/github/factor-io/ephemeral)
-[![Test Coverage](https://codeclimate.com/github/factor-io/ephemeral/coverage.png)](https://codeclimate.com/github/factor-io/ephemeral)
+[![Coverage Status](https://coveralls.io/repos/factor-io/ephemeral/badge.svg)](https://coveralls.io/r/factor-io/ephemeral)
 [![Dependency Status](https://gemnasium.com/factor-io/ephemeral.svg)](https://gemnasium.com/factor-io/ephemeral)
 [![Build Status](https://travis-ci.org/factor-io/ephemeral.svg)](https://travis-ci.org/factor-io/ephemeral)
 
