@@ -12,11 +12,11 @@ module Ephemeral
     def perform(options)
       username   = ENV['TUTUM_USERNAME']
       api_key    = ENV['TUTUM_API_KEY']
-      id         = options[:id]
-      repo       = options[:repo]
-      build_type = options[:build_type]
+      id         = options['id']
+      repo       = options['repo']
+      build_type = options['build_type']
       commands   = Ephemeral::Build.script(id:id, repo:repo, type:build_type)
-      image      = options[:image] || Ephemeral::Build.image(build_type)
+      image      = options['image'] || Ephemeral::Build.image(build_type)
       command    = "sh -c '#{commands.join(' && ')}'"
       settings   = {
         api_key:  api_key,
