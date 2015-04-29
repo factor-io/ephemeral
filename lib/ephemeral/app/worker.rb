@@ -1,6 +1,6 @@
 require 'sidekiq'
-require_relative '../lib/ephemeral/models/build_script'
-require_relative '../lib/ephemeral/providers/tutum'
+require_relative '../models/build_script'
+require_relative '../providers/tutum'
 Sidekiq.configure_server do |config|
   config.redis = { namespace: 'jobs', url:ENV['REDISCLOUD_URL'] }
 end

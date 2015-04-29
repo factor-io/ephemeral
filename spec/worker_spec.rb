@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'securerandom'
 
-require_relative '../app/worker.rb'
+require_relative '../lib/ephemeral/app/worker.rb'
 require_relative '../lib/ephemeral/models/job.rb'
 require_relative '../lib/ephemeral/models/build.rb'
 

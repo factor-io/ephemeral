@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../app/web.rb'
+require_relative '../lib/ephemeral/app/web.rb'
 
 describe 'Web' do
 	include Rack::Test::Methods

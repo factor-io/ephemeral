@@ -1,10 +1,10 @@
 require 'grape'
 
 require_relative './worker.rb'
-require_relative '../lib/ephemeral/models/job.rb'
-require_relative '../lib/ephemeral/entities/job.rb'
-require_relative '../lib/ephemeral/models/build.rb'
-require_relative '../lib/ephemeral/entities/build.rb'
+require_relative '../models/job.rb'
+require_relative '../entities/job.rb'
+require_relative '../models/build.rb'
+require_relative '../entities/build.rb'
 
 module Ephemeral
   class API < Grape::API
