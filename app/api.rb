@@ -10,7 +10,6 @@ module Ephemeral
   class API < Grape::API
     version 'v1', vendor: 'factor'
     format :json
-    prefix :api
 
     resource :jobs do
 
