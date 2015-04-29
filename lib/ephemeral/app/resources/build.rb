@@ -1,6 +1,13 @@
 module Ephemeral
   module Resources
     class Build < Grape::API
+
+    helpers do 
+      def log
+        Build.logger 
+      end
+    end
+
       desc 'Creates a new build'
       params do
         requires :image, type: String, desc: 'Docker Image ID'
@@ -14,6 +21,8 @@ module Ephemeral
 
         data = Ephemeral::Entities::Build.represent(build_model)
         Ephemeral::Worker.perform_async data
+          log.warn "Parameters: #{params}" 
+          log.warn "Route info: #{route}"
         data
       end
     end
