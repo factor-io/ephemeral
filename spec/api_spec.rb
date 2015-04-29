@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../app/api.rb'
+require_relative '../lib/ephemeral/app/api.rb'
 
 describe Ephemeral::API do
   def app

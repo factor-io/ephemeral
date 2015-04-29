@@ -1,18 +1,7 @@
-require 'grape'
-
-require_relative './worker.rb'
-require_relative '../lib/ephemeral/models/job.rb'
-require_relative '../lib/ephemeral/entities/job.rb'
-require_relative '../lib/ephemeral/models/build.rb'
-require_relative '../lib/ephemeral/entities/build.rb'
-
 module Ephemeral
-  class API < Grape::API
-    version 'v1', vendor: 'factor'
-    format :json
-
-    resource :jobs do
-
+  module Resources
+    class Job < Grape::API
+      
       desc 'Create a new job'
       params do
         requires :image, type: String, desc: "Docker Image ID"
@@ -32,25 +21,6 @@ module Ephemeral
         job_model.status = :queued
 
         data = Ephemeral::Entities::Job.represent(job_model)
-        Ephemeral::Worker.perform_async data
-        data
-      end
-    end
-
-    resource :builds do
-
-      desc 'Creates a new build'
-      params do
-        requires :image, type: String, desc: 'Docker Image ID'
-        requires :repo, type: String, desc: 'URL of target repository'
-        requires :build_type, type: String, desc: 'Middle ware'
-      end
-
-      post do 
-        build_model = Ephemeral::Models::Build.new(params)
-        build_model.status = :queued
-
-        data = Ephemeral::Entities::Build.represent(build_model)
         Ephemeral::Worker.perform_async data
         data
       end
