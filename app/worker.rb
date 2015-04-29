@@ -13,12 +13,17 @@ module Ephemeral
       username   = ENV['TUTUM_USERNAME']
       api_key    = ENV['TUTUM_API_KEY']
       id         = options[:id]
-      image      = options[:image]
       repo       = options[:repo]
       build_type = options[:build_type]
-      commands = Ephemeral::Build.script(id:id, repo:repo, type:build_type)
-      command  = "sh -c '#{commands.join(' && ')}'"
-      settings = {api_key: api_key, username: username, command:command}
+      commands   = Ephemeral::Build.script(id:id, repo:repo, type:build_type)
+      image      = options[:image] || Ephemeral::Build.image(build_type)
+      command    = "sh -c '#{commands.join(' && ')}'"
+      settings   = {
+        api_key:  api_key,
+        username: username,
+        command:  command,
+        image:    image
+      }
       client = Ephemeral::Providers::TutumProvider.new(settings)
 
       client.start

@@ -43,7 +43,7 @@ module Ephemeral
     end
 
     def self.image(type)
-      BUILD_SETTINGS[type][:default_image]
+      BUILD_SETTINGS[type.to_sym][:default_image]
     end
   end
 end
