@@ -5,6 +5,10 @@ Sidekiq.configure_server do |config|
   config.redis = { namespace: 'jobs', url:ENV['REDISCLOUD_URL'] }
 end
 
+Sidekiq.configure_client do |config|
+  config.redis = { namespace: 'jobs', size: 1, url:ENV['REDISCLOUD_URL'] }
+end
+
 module Ephemeral
   class Worker
     include Sidekiq::Worker

@@ -1,15 +1,10 @@
 require 'grape'
-require 'sidekiq'
 
 require_relative './worker.rb'
 require_relative '../lib/ephemeral/models/job.rb'
 require_relative '../lib/ephemeral/entities/job.rb'
 require_relative '../lib/ephemeral/models/build.rb'
 require_relative '../lib/ephemeral/entities/build.rb'
-
-Sidekiq.configure_client do |config|
-  config.redis = { namespace: 'jobs', size: 1, url:ENV['REDISCLOUD_URL'] }
-end
 
 module Ephemeral
   class API < Grape::API
