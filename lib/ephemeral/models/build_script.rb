@@ -2,7 +2,7 @@
 module Ephemeral
   module Build
     WORKING_DIR = '/work'
-    DEFAULT_LIBS = ['unzip','zip']
+    DEFAULT_LIBS = ['unzip','zip','wget','curl']
     BUILD_SETTINGS = {
       middleman: {
         commands:[
@@ -10,7 +10,7 @@ module Ephemeral
           'bundle exec middleman build'
           ],
         libs: ['nodejs'],
-        build_path: 'build'
+        build_path: 'build',
         default_image: 'ruby:2.1'
       }
     }
@@ -19,7 +19,7 @@ module Ephemeral
       id         = options[:id]
       repo       = options[:repo]
       type       = options[:type]
-      upload_dir = options[:upload_dir] || "http://ephemeral.io/files/#{id}"
+      upload_url = options[:upload_url] || "http://ephemeral.io/files/#{id}"
       libs       = options[:libs] || []
       settings   = BUILD_SETTINGS[type.to_sym]
       libs       = settings[:libs] + DEFAULT_LIBS + libs
