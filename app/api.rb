@@ -13,7 +13,7 @@ end
 
 module Ephemeral
   class API < Grape::API
-    version 'v1', using: :header, vendor: 'factor'
+    version 'v1', vendor: 'factor'
     format :json
     prefix :api
 
