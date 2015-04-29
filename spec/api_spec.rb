@@ -38,7 +38,7 @@ describe Ephemeral::API do
   describe 'Builds' do
     it 'can create' do 
       request_build = {
-        image: 'ruby2.2',
+        image: 'ruby:2.1',
         repo: 'http://github.com/skierkowski/hello-middleman',
         build_type: 'middleman'
       }
