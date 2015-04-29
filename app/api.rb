@@ -34,7 +34,7 @@ module Ephemeral
       end
 
       post do
-        job_model = Ephemeral::Models::Job.new
+        job_model = Ephemeral::Models::Job.new(params)
         job_model.status = :queued
 
         data = Ephemeral::Entities::Job.represent(job_model)
@@ -53,7 +53,7 @@ module Ephemeral
       end
 
       post do 
-        build_model = Ephemeral::Models::Build.new
+        build_model = Ephemeral::Models::Build.new(params)
         build_model.status = :queued
 
         data = Ephemeral::Entities::Build.represent(build_model)
