@@ -20,4 +20,5 @@ group :test do
   gem 'guard-rspec', '~> 4.5.0'
   gem 'mock_redis', '~> 0.14.0'
   gem 'rspec-sidekiq', '~> 2.0.0'
+  gem 'coveralls', '~> 0.8.1', require:false
 end
