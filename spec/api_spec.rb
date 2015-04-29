@@ -21,7 +21,7 @@ describe Ephemeral::API do
           }
         ]
       }
-      post '/api/jobs', request_data
+      post '/api/v1/jobs', request_data
       
       response_data = JSON.parse(last_response.body)
 
@@ -42,7 +42,7 @@ describe Ephemeral::API do
         repo: 'http://github.com/skierkowski/hello-middleman',
         build_type: 'middleman'
       }
-      post '/api/builds', request_build
+      post '/api/v1/builds', request_build
 
       response_build = JSON.parse(last_response.body)
 
