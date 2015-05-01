@@ -27,6 +27,7 @@ describe Ephemeral::API do
       expect(response_build.keys).to include('status')
       
       expect(response_build.keys).to_not be nil
+      # expect(response_build[:repo]).to_not be nil
 
       expect(Ephemeral::Worker).to have_enqueued_job(response_build)
     end

@@ -7,7 +7,7 @@ module Ephemeral
   module Resources
     class Build < Grape::API
 
-      
+
       def initialize
         @builds = {}
       end
@@ -33,51 +33,59 @@ module Ephemeral
         end
       end
 
+      resource @builds do
 
-      desc 'Creates a new build'
+        desc 'Creates a new build'
 
-      params do
-        requires :image, type: String, desc: 'Docker Image ID', values: ['ruby:2.1']
-        requires :repo, type: String, desc: 'URL of target repository'
-        requires :build_type, type: String, desc: 'Middle ware', values: ['middleman']
-      end
+        params do
+          requires :image, type: String, desc: 'Docker Image ID', values: ['ruby:2.1']
+          requires :repo, type: String, desc: 'URL of target repository'
+          requires :build_type, type: String, desc: 'Middle ware', values: ['middleman']
+        end
 
-      post do 
-        build_model = Ephemeral::Models::Build.new(params)
-        build_model.status = :queued
-
-
-        data = Ephemeral::Entities::Build.represent(build_model)
-        Ephemeral::Worker.perform_async data
+        post do 
+          build_model = Ephemeral::Models::Build.new(params)
+          build_model.status = :queued
 
 
+          data = Ephemeral::Entities::Build.represent(build_model)
+          Ephemeral::Worker.perform_async data
 
-        log.info "Parameters: #{params}" 
-        log.info "Route info: #{route}"
-        log.info url_exist?(params[:repo])
-        # binding.pry
-        data
-      end
 
-      put '/build/:id' do
-        id = params[:id]
-        build_model = @builds[id]
+
+          log.info "Parameters: #{params}" 
+          log.info "Route info: #{route}"
+          log.info url_exist?(params[:repo])
+
+          data
+        end
+        
+        route_param :id do
+
+          get do
+            id = params[:id]
+            build_model = @builds[id]
  
- 
-        build_model.update(params)
-        @builds[build_model.id] = build_model
-        data = Ephemeral::Entities::Build.represent(build_model)
-        data
-      end
+            data = Ephemeral::Entities::Build.represent(build_model)
 
-      get '/build/:id' do
-        id = params[:id]
-        build_model = @builds[id]
- 
-        data = Ephemeral::Entities::Build.represent(build_model)
+            data
+          end
 
-        data
+          put do
+            id = params[:id]
+            build_model = @builds[id]
+     
+     
+            build_model.update(params) # this likely does not work
+     
+            @builds[build_model.id] = build_model
 
+            data = Ephemeral::Entities::Build.represent(build_model)
+            
+            data
+          end
+
+        end
       end
     end
   end
