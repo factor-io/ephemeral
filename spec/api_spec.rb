@@ -8,6 +8,7 @@ describe Ephemeral::API do
   def app
     Ephemeral::API
   end
+<<<<<<< HEAD
   
 
   request_data = {
@@ -37,6 +38,8 @@ describe Ephemeral::API do
     end
   end
 
+=======
+>>>>>>> a5a5d294f4ad9760728fea204dbe22bdae48c8b0
 
   request_build = {
     image: 'ruby:2.1',
