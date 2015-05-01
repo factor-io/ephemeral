@@ -54,7 +54,8 @@ module Ephemeral
 
         log.info "Parameters: #{params}" 
         log.info "Route info: #{route}"
-        url_exist?('http://github.com/skierkowski/hello-middleman')
+        log.info url_exist?(params[:repo])
+        # binding.pry
         data
       end
 
