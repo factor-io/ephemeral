@@ -9,18 +9,21 @@ describe Ephemeral::API do
     Ephemeral::API
   end
   
+
+  request_data = {
+    image: 'ubuntu',
+    commands: ['ls'],
+    files: [
+      {
+        path:'/foo',
+        content: 'echo "Hello World!"'
+      }
+    ]
+  }
+
   describe 'Jobs' do
     it 'can create' do
-      request_data = {
-        image: 'ubuntu',
-        commands: ['ls'],
-        files: [
-          {
-            path:'/foo',
-            content: 'echo "Hello World!"'
-          }
-        ]
-      }
+
       post '/v1/jobs', request_data
       
       response_data = JSON.parse(last_response.body)
@@ -35,13 +38,16 @@ describe Ephemeral::API do
   end
 
 
+  request_build = {
+    image: 'ruby:2.1',
+    repo: 'http://github.com/skierkowski/hello-middleman',
+    build_type: 'middleman'
+  }
+
+
   describe 'Builds' do
     it 'can create' do 
-      request_build = {
-        image: 'ruby:2.1',
-        repo: 'http://github.com/skierkowski/hello-middleman',
-        build_type: 'middleman'
-      }
+
       post '/v1/builds', request_build
 
       response_build = JSON.parse(last_response.body)
@@ -49,6 +55,7 @@ describe Ephemeral::API do
       expect(last_response.status).to eq(201), response_build['error']
       expect(response_build.keys).to include('id')
       expect(response_build.keys).to include('status')
+      expect(response_build.keys).to_not be nil
 
       expect(Ephemeral::Worker).to have_enqueued_job(response_build)
     end

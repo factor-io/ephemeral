@@ -8,7 +8,6 @@ gem 'haml', '~> 4.0.6'
 gem 'grape', '~> 0.11.0'
 gem 'grape-entity', '~> 0.4.5'
 gem 'tutum', '~> 0.2.5'
-gem 'dotenv'
 # Runtime
 gem 'foreman', '~> 0.78.0'
 gem 'sidekiq', '~> 3.3.4'
@@ -22,4 +21,7 @@ group :test do
   gem 'mock_redis', '~> 0.14.0'
   gem 'rspec-sidekiq', '~> 2.0.0'
   gem 'coveralls', '~> 0.8.1', require:false
+  gem 'dotenv'
+  gem 'pry'
+
 end
