@@ -1,6 +1,7 @@
 require 'sidekiq'
-require_relative '../models/build_script'
+require_relative '../framework_registry'
 require_relative '../providers/tutum'
+
 Sidekiq.configure_server do |config|
   config.redis = { namespace: 'jobs', url:ENV['REDISCLOUD_URL'] }
 end
@@ -19,9 +20,12 @@ module Ephemeral
       id         = options['id']
       repo       = options['repo']
       build_type = options['build_type']
-      commands   = Ephemeral::Build.script(id:id, repo:repo, type:build_type)
-      image      = options['image'] || Ephemeral::Build.image(build_type)
-      command    = "sh -c '#{commands.join(' && ')}'"
+
+      framework_class = Ephemeral::FrameworkRegistry.get(build_type)
+      framework = framework_class.new(source:repo,destination:"http://ephemeral.io/files/#{id}")
+
+      image      = framework.image
+      command    = framework.command
       settings   = {
         api_key:  api_key,
         username: username,
