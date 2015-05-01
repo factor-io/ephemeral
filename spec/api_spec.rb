@@ -9,15 +9,14 @@ describe Ephemeral::API do
     Ephemeral::API
   end
 
-  request_build = {
-    image: 'ruby:2.1',
-    repo: 'http://github.com/skierkowski/hello-middleman',
-    build_type: 'middleman'
-  }
 
   describe 'Builds' do
     it 'can create' do 
-
+      request_build = {
+        image: 'ruby:2.1',
+        repo: 'http://github.com/skierkowski/hello-middleman',
+        build_type: 'middleman'
+      }
       post '/v1/builds', request_build
 
       response_build = JSON.parse(last_response.body)
