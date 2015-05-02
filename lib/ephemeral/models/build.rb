@@ -12,6 +12,13 @@ module Ephemeral
         @build_type = build_settings[:build_type] || ''
         @status     = :new
       end
+
+      def update(build_settings={})
+        @image      = build_settings[:image] || @image
+        @repo       = build_settings[:repo] || @repo
+        @build_type = build_settings[:build_type] || @build_type
+        @status     = build_settings[:status] || @status || :new
+      end
     end
   end
 end
