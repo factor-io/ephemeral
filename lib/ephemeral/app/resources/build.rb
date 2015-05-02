@@ -19,15 +19,16 @@ module Ephemeral
 
         data = Ephemeral::Entities::Build.represent(build_model)
         Ephemeral::Worker.perform_async data
-        data
+        
+        present build_model, with:Ephemeral::Entities::Build
       end
 
       route_param :id do
         get do
           id = params[:id]
           build_model = @@builds[id]
-          data = Ephemeral::Entities::Build.represent(build_model)
-          data
+          
+          present build_model, with:Ephemeral::Entities::Build
         end
 
         put do 
@@ -37,8 +38,7 @@ module Ephemeral
           build_model.update(params)
           @@builds[build_model.id] = build_model          
 
-          data = Ephemeral::Entities::Build.represent(build_model)
-          data
+          present build_model, with: Ephemeral::Entities::Build
         end
       end
     end
