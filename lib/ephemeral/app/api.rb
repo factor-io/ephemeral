@@ -11,5 +11,6 @@ module Ephemeral
     format :json
 
     group(:builds) { mount Ephemeral::Resources::Build }
+    group(:files)  { mount Ephemeral::Resources::File }
   end
 end
