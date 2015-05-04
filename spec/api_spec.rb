@@ -41,6 +41,7 @@ describe Ephemeral::API do
 
       content = JSON.parse(get_response.body)
 
+      expect(last_response.status).to eq(200)
       expect(content.keys).to include('id')
       expect(content.keys).to include('status')
     end
@@ -58,7 +59,8 @@ describe Ephemeral::API do
       get_response = put "/v1/builds/#{id}", status:'done'
 
       content = JSON.parse(get_response.body)
-
+     
+      expect(last_response.status).to eq(200)
       expect(content['status']).to eq('done')
     end
   end
