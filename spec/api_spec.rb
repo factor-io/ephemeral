@@ -10,6 +10,47 @@ describe Ephemeral::API do
   end
 
   describe 'Builds' do
+    describe 'Validation' do 
+      it 'validates bad image' do
+        request_build = {
+          image: 'ruby:2.2',
+          repo: 'http://github.com/skierkowski/hello-middleman',
+          build_type: 'middleman'
+        }
+
+        post '/v1/builds', request_build
+        error = JSON.parse(last_response.body)['error']
+        expect(last_response.status).to eq(400)
+        expect(error).to eq('image does not have a valid value')
+      end
+
+      it 'validates bad repo' do
+        request_build = {
+          image: 'ruby:2.1',
+          repo: 'fail',
+          build_type: 'middleman'
+        }
+
+        post '/v1/builds', request_build
+        error = JSON.parse(last_response.body)['error']
+        expect(last_response.status).to eq(400)
+        expect(error).to eq('repo is invalid')
+      end
+
+      it 'validates bad build type' do
+        request_build = {
+          image: 'ruby:2.1',
+          repo: 'http://github.com/skierkowski/hello-middleman',
+          build_type: 'not_supported'
+        }
+
+        post '/v1/builds', request_build
+        error = JSON.parse(last_response.body)['error']
+        expect(last_response.status).to eq(400)
+        expect(error).to eq('build_type does not have a valid value')
+      end
+    end
+
     it 'can create' do 
       request_build = {
         image: 'ruby2.2',
