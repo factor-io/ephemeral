@@ -9,6 +9,17 @@ describe Ephemeral::API do
     Ephemeral::API
   end
 
+  describe 'File' do
+    it 'can create file' do
+      file_params = {file:'something'}
+      post '/v1/files', file_params
+
+      response = JSON.parse(last_response.body)
+
+      expect(response.keys).to include('id')
+    end
+  end
+
   describe 'Builds' do
     describe 'Validation' do 
       it 'validates bad image' do
