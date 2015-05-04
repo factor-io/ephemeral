@@ -53,7 +53,7 @@ describe Ephemeral::API do
 
     it 'can create' do 
       request_build = {
-        image: 'ruby2.2',
+        image: 'ruby:2.1',
         repo: 'http://github.com/skierkowski/hello-middleman',
         build_type: 'middleman'
       }
@@ -70,7 +70,7 @@ describe Ephemeral::API do
 
     it 'can get a build' do
       request_build = {
-        image: 'ruby2.2',
+        image: 'ruby:2.1',
         repo: 'http://github.com/skierkowski/hello-middleman',
         build_type: 'middleman'
       }
@@ -88,7 +88,7 @@ describe Ephemeral::API do
 
     it 'can update a build' do
       request_build = {
-        image: 'ruby2.2',
+        image: 'ruby:2.1',
         repo: 'http://github.com/skierkowski/hello-middleman',
         build_type: 'middleman'
       }
