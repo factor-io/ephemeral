@@ -7,7 +7,7 @@ module Ephemeral
 
       def initialize(params={})
         @id   = params[:id] || SecureRandom.hex(8)
-        @file = params['file'][:tempfile]
+        @file = params['file'][:tempfile].read
         @type = params['file'][:type]
         @name = params['file'][:filename]
       end
