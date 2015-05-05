@@ -10,11 +10,7 @@ module Ephemeral
 
       post do
         file_model = Ephemeral::Models::File.new(params)
-        
         @@files[file_model.id] = file_model
-
-        data = Ephemeral::Entities::File.represent(file_model)
-
         present file_model, with:Ephemeral::Entities::File
       end
     end
