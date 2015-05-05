@@ -11,12 +11,14 @@ describe Ephemeral::API do
 
   describe 'File' do
     it 'can create file' do
-      file_params = {file:'something'}
-      post '/v1/files', file_params
+
+      post '/v1/files', file:Rack::Test::UploadedFile.new('README.md')
 
       response = JSON.parse(last_response.body)
 
       expect(response.keys).to include('id')
+      expect(response.keys).to include('name')
+      expect(response.keys).to include('type')
     end
   end
 
