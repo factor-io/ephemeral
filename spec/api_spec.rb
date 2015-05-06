@@ -10,6 +10,8 @@ describe Ephemeral::API do
   end
 
   describe 'File' do
+    describe 'Validation' do 
+    end
 
     it 'can create file' do
       post '/v1/files', file:Rack::Test::UploadedFile.new('README.md')      
@@ -23,7 +25,6 @@ describe Ephemeral::API do
 
     it 'can retrieve a file' do 
       create_response = post '/v1/files', file:Rack::Test::UploadedFile.new('README.md')
-
       id = JSON.parse(create_response.body)['id']
       get_response = get "/v1/files/#{id}"
       expect(last_response.status).to eq(200)
