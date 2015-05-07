@@ -5,7 +5,10 @@ module Ephemeral
       
       desc 'Creates a new file'
       params do
-        requires :file, desc: 'File to upload'
+        group :file, type: Hash do
+          requires :filename, type: String, desc: 'File name'
+          requires :type, type: String, desc: 'File type'
+        end
       end
 
       post do

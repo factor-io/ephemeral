@@ -1,5 +1,4 @@
 # encoding: UTF-8
-
 require 'spec_helper'
 
 require_relative '../lib/ephemeral/app/api.rb'
@@ -10,15 +9,26 @@ describe Ephemeral::API do
   end
 
   describe 'File' do
-    it 'can create file' do
+    describe 'Validation' do 
+    end
 
-      post '/v1/files', file:Rack::Test::UploadedFile.new('README.md')
+    it 'can create file' do
+      post '/v1/files', file:Rack::Test::UploadedFile.new('README.md')      
 
       response = JSON.parse(last_response.body)
-
       expect(response.keys).to include('id')
       expect(response.keys).to include('name')
       expect(response.keys).to include('type')
+      expect(last_response.status).to eq(201)
+    end
+
+    it 'can retrieve a file' do 
+      create_response = post '/v1/files', file:Rack::Test::UploadedFile.new('README.md')
+      id = JSON.parse(create_response.body)['id']
+      get_response = get "/v1/files/#{id}"
+      expect(last_response.status).to eq(200)
+      expect(get_response.body).to include("Ephemeral.io is a Docker-based micro-PaaS for short-lived work.")
+
     end
   end
 
