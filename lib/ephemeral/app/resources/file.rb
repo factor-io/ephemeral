@@ -6,8 +6,8 @@ module Ephemeral
       desc 'Creates a new file'
       params do
         group :file, type: Hash do
-          requires :filename, type: String, desc: 'File name', values: ["README.md"]
-          requires :type, type: String, desc: 'File type', values: ["text/plain"]
+          requires :filename, type: String, desc: 'File name'
+          requires :type, type: String, desc: 'File type'
         end
       end
 
