@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'pry'
 require 'spec_helper'
 
 require_relative '../lib/ephemeral/app/api.rb'
