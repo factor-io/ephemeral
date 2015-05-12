@@ -11,6 +11,7 @@ module Ephemeral
         @repo       = build_settings[:repo] || ''
         @build_type = build_settings[:build_type] || ''
         @status     = :new
+        @logs       = build_settings[:logs] || []        
       end
 
       def update(build_settings={})
@@ -18,6 +19,7 @@ module Ephemeral
         @repo       = build_settings[:repo] || @repo
         @build_type = build_settings[:build_type] || @build_type
         @status     = build_settings[:status] || @status || :new
+        @logs       = build_settings[:logs] || []     
       end
     end
   end
