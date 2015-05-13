@@ -12,8 +12,6 @@ gem 'tutum', '~> 0.2.6'
 gem 'foreman', '~> 0.78.0'
 gem 'sidekiq', '~> 3.3.4'
 
-gem 'dotenv-rails', :groups => [:development, :test]
-
 group :test do
   gem 'rspec', '~> 3.2.0'
   gem 'rake', '~> 10.4.2'
