@@ -5,9 +5,6 @@ module Ephemeral
     class Build
       attr_accessor :id, :image, :repo, :build_type, :status, :logs
       
-      def logs
-        @tutum.services.logs(@service_id)['logs']
-      end
 
       def initialize(build_settings={})
         @id         = build_settings[:id] || SecureRandom.hex(8)
