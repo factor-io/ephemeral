@@ -2,9 +2,6 @@
 require 'spec_helper'
 
 require_relative '../lib/ephemeral/app/api.rb'
-require_relative '../lib/ephemeral/app/worker.rb'
-require_relative '../lib/ephemeral/models/build.rb'
-require_relative '../lib/ephemeral/providers/tutum.rb'
 
 
 describe Ephemeral::API do
