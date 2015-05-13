@@ -3,7 +3,8 @@ require 'securerandom'
 module Ephemeral
   module Models
     class Build
-      attr_accessor :id, :image, :repo, :build_type, :status
+      attr_accessor :id, :image, :repo, :build_type, :status, :logs
+      
 
       def initialize(build_settings={})
         @id         = build_settings[:id] || SecureRandom.hex(8)
@@ -11,6 +12,7 @@ module Ephemeral
         @repo       = build_settings[:repo] || ''
         @build_type = build_settings[:build_type] || ''
         @status     = :new
+        @logs       = build_settings[:logs] || []        
       end
 
       def update(build_settings={})
@@ -18,6 +20,7 @@ module Ephemeral
         @repo       = build_settings[:repo] || @repo
         @build_type = build_settings[:build_type] || @build_type
         @status     = build_settings[:status] || @status || :new
+        @logs       = build_settings[:logs] || []     
       end
     end
   end

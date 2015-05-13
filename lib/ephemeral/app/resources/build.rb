@@ -37,9 +37,27 @@ module Ephemeral
           build_model = @@builds[id]
 
           build_model.update(params)
-          @@builds[build_model.id] = build_model          
+          @@builds[build_model.id] = build_model
 
           present build_model, with: Ephemeral::Entities::Build
+        end
+        
+        route_param :logs do
+          post do
+            id          = params['id']
+            log         = params['log']
+            build_model = @@builds[id]
+
+            build_model.logs << log
+            @@builds[id] = build_model
+            {log: log}
+          end
+
+          get do
+            id          = params['id']
+            build_model = @@builds[id]
+            build_model.logs
+          end
         end
       end
     end

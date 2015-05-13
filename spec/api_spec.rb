@@ -3,11 +3,12 @@ require 'spec_helper'
 
 require_relative '../lib/ephemeral/app/api.rb'
 
+
 describe Ephemeral::API do
   def app
     Ephemeral::API
   end
-
+ 
   describe 'File' do
     describe 'Validation' do 
     end
@@ -29,6 +30,36 @@ describe Ephemeral::API do
       expect(last_response.status).to eq(200)
       expect(get_response.body).to include("Ephemeral.io is a Docker-based micro-PaaS for short-lived work.")
 
+    end
+  end
+
+  describe 'Logs' do
+    before do
+      request_build = {
+        image: 'ruby:2.1',
+        repo: 'http://github.com/skierkowski/hello-middleman',
+        build_type: 'middleman'
+      }
+      post '/v1/builds', request_build
+
+      response_build = JSON.parse(last_response.body)
+
+      @build_id = response_build['id']
+    end
+
+    it 'can post a log' do
+      post "/v1/builds/#{@build_id}/logs", log:'Hello world'
+      response = JSON.parse(last_response.body)
+      expect(response.keys).to include('log')
+      expect(response['log']).to eq('Hello world')
+    end
+
+    it 'can get a log' do
+      post "/v1/builds/#{@build_id}/logs", log:'Hello world'
+      get "/v1/builds/#{@build_id}/logs"
+      response = JSON.parse(last_response.body)
+      expect(response).to be_a(Array)
+      expect(response.first).to eq('Hello world')
     end
   end
 
