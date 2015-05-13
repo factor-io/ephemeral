@@ -7,6 +7,7 @@ require_relative './resources/build.rb'
 require_relative '../models/file.rb'
 require_relative '../entities/file.rb'
 require_relative './resources/file.rb'
+require_relative '../providers/tutum.rb'
 
 module Ephemeral
   class API < Grape::API
