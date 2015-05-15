@@ -157,4 +157,19 @@ describe Ephemeral::API do
       expect(content['status']).to eq('done')
     end
   end
+
+  describe 'Users' do
+    it 'can create a user' do
+      credentials = {
+        email: 'testuser@email.com'
+        password: 'password'
+      }
+      
+      registration_response = post '/v1/users', credentials
+
+      content = JSON.parse(registraion_response)
+
+      expect(content.keys).to include('auth_token')
+    end
+  end
 end
