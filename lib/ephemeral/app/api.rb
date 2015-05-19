@@ -7,6 +7,9 @@ require_relative './resources/build.rb'
 require_relative '../models/file.rb'
 require_relative '../entities/file.rb'
 require_relative './resources/file.rb'
+require_relative '../models/user.rb'
+require_relative '../entities/user.rb'
+require_relative './resources/user.rb'
 
 module Ephemeral
   class API < Grape::API
