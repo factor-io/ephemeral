@@ -8,6 +8,8 @@ gem 'haml', '~> 4.0.6'
 gem 'grape', '~> 0.11.0'
 gem 'grape-entity', '~> 0.4.5'
 gem 'tutum', '~> 0.2.6'
+gem 'sqlite3'
+gem 'sequel'
 # Runtime
 gem 'foreman', '~> 0.78.0'
 gem 'sidekiq', '~> 3.3.4'

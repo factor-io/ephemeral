@@ -18,5 +18,6 @@ module Ephemeral
 
     group(:builds) { mount Ephemeral::Resources::Build }
     group(:files)  { mount Ephemeral::Resources::File }
+    group(:users) { mount Ephemeral::Resources::User }
   end
 end

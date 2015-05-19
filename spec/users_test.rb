@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'pry'
 
 require_relative '../lib/ephemeral/app/api.rb'
 
@@ -10,16 +11,14 @@ describe "User" do
   end
 
   describe "signing up" do
-
-    it "creates a user" do
-      request_user = {
+    before do 
+      post "/v1/users", user: {
         email: 'test@test.com',
         password: '1234'
       }
-      post '/v1/users', request_user
+    end
 
-      response_user = JSON.parse(last_response.body)
-      
+    it "creates a user" do
       expect(last_response.status).to eq(201)
     end
   end
