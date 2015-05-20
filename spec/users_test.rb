@@ -3,6 +3,7 @@ require 'pry'
 
 require_relative '../lib/ephemeral/app/api.rb'
 
+
 describe "User" do
   include Rack::Test::Methods
 
@@ -19,6 +20,7 @@ describe "User" do
     end
 
     it "creates a user" do
+      expect(last_response.body).to include('test@tst.com')    
       expect(last_response.status).to eq(201)
     end
   end
