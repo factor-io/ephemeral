@@ -2,7 +2,7 @@ module Ephemeral
   module Resources
     class User < Grape::API
 
-      @@users = {}
+    @@users = {}   
 
       params do
         group :user, type: Hash do

@@ -20,7 +20,7 @@ describe "User" do
     end
 
     it "creates a user" do
-      expect(last_response.body).to include('test@tst.com')    
+      expect(last_response.body).to include('test@test.com')    
       expect(last_response.status).to eq(201)
     end
   end
