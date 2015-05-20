@@ -12,14 +12,11 @@ describe "User" do
   end
 
   describe "signing up" do
-    before do 
+    it "creates a user" do
       post "/v1/users", user: {
         email: 'test@test.com',
         password: '1234'
       }
-    end
-
-    it "creates a user" do
       expect(last_response.body).to include('test@test.com') 
       expect(last_response.status).to eq(201)
     end
